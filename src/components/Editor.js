@@ -26,10 +26,7 @@ class Editor extends Component{
             <form onSubmit={this.handleSubmit.bind(this)}>
             <input className="input-title" type="text" placeholder="  enter title" value={this.state.title} onChange={this.handleTitleChange.bind(this)} />
             <textarea className="input-content" placeholder="  enter content(support markdown)" value={this.state.content} onChange={this.handleContentChange.bind(this)} />
-            <button className="submit-button" type="submit">
-            submit
-            <Link to={"/articles"}></Link>
-            </button>
+            <input className="submit-button" type="submit" value="submit"/>
             </form>
             </div>
         )
