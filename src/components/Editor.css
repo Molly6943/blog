@@ -1,0 +1,35 @@
+input, textarea {
+    display: block;
+    outline: none;
+    border: none;
+}
+.write-essay {
+    background-color: #fff;
+    margin: 0;
+    padding: 20px;
+}
+.write-essay input, .write-essay textarea {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 18px;
+}
+.submit-button {
+    margin-top: 20px;
+    margin-bottom: 50px;
+    width: 100px;
+    border: none;
+    border-radius: 9999px;
+    background: #ffd524;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    box-shadow: 0 3px 0 #daae1d;
+}
+.input-title{
+    width: 100%;
+    height: 50px;
+}
+.input-content{
+    margin-top: 20px;
+    width: 100%;
+    height: 500px;
+}

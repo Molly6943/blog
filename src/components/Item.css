@@ -1,0 +1,47 @@
+.item h1 {
+    line-height: 1;
+    margin: 0;
+    padding: 20px;
+}
+.item h1 a {
+    text-decoration: none;
+    color: #62686f;
+}
+.item h1 a:hover {
+    text-decoration: underline;
+}
+.edit-article {
+    display: inline-block;
+    margin-left: 20px;
+    width: 100px;
+    line-height: 30px;
+    text-align: center;
+    height: 30px;
+    background: #ffd524;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 3px 0 #daae1d;
+    border-radius: 6px;
+}
+.edit-article a {
+    text-decoration: none;
+    color: #fff;
+    text-align: center;
+}
+.remove-button {
+    display: inline-block;
+    margin-left: 20px;
+    width: 100px;
+    line-height: 30px;
+    text-align: center;
+    height: 30px;
+    border: none;
+    border-radius: 6px;
+    background: #ffd524;
+    cursor: pointer;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    box-shadow: 0 3px 0 #daae1d;
+}
+.item p{
+    padding: 20px;
+}
