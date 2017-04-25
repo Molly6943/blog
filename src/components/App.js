@@ -6,54 +6,53 @@ import {
   Switch,
   Redirect
 } from 'react-router-dom'
-import styles from './App.css'
+import styles from '../styles/App.css'
 import List from './List'
 import Article from './Article'
 import Editor from './Editor'
 import About from './About'
-import {$db,$uid} from '../util'
+import { $db, $uid } from '../util'
 
 const App = () => {
-    const $articles = $db.get('articles') || {}
-    const renderList = () => <List articles={$articles} onArticleRemove={handleArticleRemove}/>
-    const renderArticle = ({match}) => <Article article={$articles[match.params.id]}/>
-    const renderArticleEditor = ({match}) => {
-        const id = match.params.id;
-        const article = id ? $articles[id] :{title:'',content:''}
-        return <Editor article={article} onAdd={ handleArticleAdd.bind(this) } onEdit={ handleArticleEdit.bind(this) } />
-    }
+  const $articles = $db.get('articles') || {}
+  console.log(JSON.stringify($articles))
+  function updateDb (articles) {
+    $db.set('articles', articles)
+  }
+  function handleArticleAdd (article){
+    const id = $uid.generate()
+    $articles[id] = { id, ...article }
+    updateDb($articles)
+  }
 
-function handleArticleAdd(article) {
-     const id = $uid.generate()
-     $articles[id] = { id, ...article }
-     updateDb($articles)
-}
+  function handleArticleEdit (id, article) {
+    $articles[id] = { id, ...article }
+    updateDb($articles)
+  }
 
-function handleArticleEdit (id, article) {
-   $articles[id] = { id, ...article }
-   updateDb($articles)
-}
-
-function handleArticleRemove (id) {
+  function handleArticleRemove (id) {
     delete $articles[id]
     updateDb($articles)
-}
+  }
 
-function updateDb (articles) {
-    $db.set('articles', articles)
-}
-
-return <Router>
+  const renderList = () => <List articles={ $articles } onArticleRemove={ handleArticleRemove }/>
+  const renderArticle = ({ match }) => <Article match={ match } article={ $articles[match.params.id]}/>
+  const renderArticleEditor = ({ match }) => {
+    const id = match.params.id;
+    const article = id ? $articles[id] : { title: '', content: '' }
+    return <Editor article={ article } onAdd={ handleArticleAdd.bind(this) } onEdit={ handleArticleEdit.bind(this) } />
+  }
+  return <Router>
   <div className="app">
-  <div className="main-header">
-  <img className="main-header__avatar" src="img/avatar.png"/>
-  <h1>Hi,I am Meng Meng</h1>
+    <div className="main-header">
+    <img className="main-header__avatar" src="img/avatar.png"/>
+    <h1>Hi,I am Meng Meng</h1>
   </div>
   <div className="main-nav">
     <ul>
-        <li><Link to="/articles">Blog</Link></li>
-        <li><Link to="/articles/new">Write</Link></li>
-        <li><Link to="/about">about</Link></li>
+      <li><Link to="/articles">Blog</Link></li>
+      <li><Link to="/articles/new">Write</Link></li>
+      <li><Link to="/about">about</Link></li>
     </ul>
   </div>
     <Route exact path="/" render={ () => <Redirect to="/articles"/> } />

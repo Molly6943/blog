@@ -12,13 +12,17 @@
   "devDependencies": {
     "babel": "^5.8.23",
     "babel-core": "^6.24.1",
+    "babel-eslint": "^7.2.3",
     "babel-loader": "^6.4.1",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "css-loader": "^0.28.0",
+    "eslint": "^3.19.0",
+    "eslint-loader": "^1.7.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-react": "^6.10.3",
     "file-loader": "^0.11.1",
-    "react-hot-loader": "^3.0.0-beta.6",
     "style-loader": "^0.16.1",
     "url-loader": "^0.5.8",
     "webpack": "^2.3.3",
@@ -26,10 +30,13 @@
   },
   "dependencies": {
     "browser-sync": "^2.9.3",
+    "markdown": "^0.5.0",
     "lodash": "^4.17.4",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-hot-loader": "^3.0.0-beta.6",
-    "react-router-dom": "^4.1.1"
+    "react-router-dom": "^4.1.1",
+    "react-redux": "^5.0.4",
+    "redux": "^3.6.0"
   }
 }

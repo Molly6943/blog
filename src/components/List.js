@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Item from './Item'
-import styles from './List.css'
+import styles from '../styles/List.css'
 
-class List extends React.Component {
-  constructor({ articles, onArticleRemove }) {
+class List extends Component {
+  constructor ({ articles, onArticleRemove }){
     super()
     this.state = articles
     this.handleArticleRemove = this.handleArticleRemove.bind(this)
@@ -16,8 +16,8 @@ class List extends React.Component {
   render () {
     return (
       <ul className="list"> {
-        this.state && Object.values(this.state).map(
-          article => <Item key={ article.id } article={ article } onArticleRemove={ this.handleArticleRemove.bind(this) }/>
+        this.state && Object.values(this.state).map((article) =>
+          <Item key={ article.id } article={ article } onArticleRemove={ this.handleArticleRemove.bind(this) }/>
         )
       } </ul>
     )

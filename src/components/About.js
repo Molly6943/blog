@@ -1,7 +1,7 @@
 import React from 'react'
 const About = () => (
-    <div style={{background: "white"}}>
+  <div style={{ background: 'white' }}>
     <h1>about</h1>
-    </div>
+  </div>
 )
 export default About

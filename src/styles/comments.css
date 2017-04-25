@@ -1,0 +1,40 @@
+.input-name{
+  padding-left: 10px;
+  width: 50%;
+  height: 30px;
+  margin-left: 20px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+.input-comment{
+  padding-left: 10px;
+  width: 50%;
+  height: 50px;
+  margin-left: 20px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+.submit{
+  margin-left: 20px;
+  margin-top: 20px;
+  width: 100px;
+  border: none;
+  border-radius: 9999px;
+  background: #ffd524;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  box-shadow: 0 3px 0 #daae1d;
+}
+.submit-input{
+  padding-bottom: 30px;
+}
+.commnent_contents {
+  padding-left: 20px;
+  color: pink;
+}
+.commnent_time{
+  margin-left: 20px;
+  font-size: 12px;
+}
