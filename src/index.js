@@ -1,25 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import { createStore } from 'redux'
 import { AppContainer } from 'react-hot-loader';
-// AppContainer is a necessary wrapper component for HMR
+import { $db } from './util'
+import App from './App';
+import AppStore from './store'
 
-import App from './components/App';
-
-const render = (Component) => {
+const persistedState = $db.get('reduxState') || []
+// createStore是用来生成store的，
+const store = createStore(AppStore, persistedState)
+// store.subscribe方法设置监听函数，一旦state发生变化，就会自动执行这个函数
+store.subscribe(() => { $db.set('reduxState', store.getState()) })
+const render = (App) => {
   ReactDOM.render(
     <AppContainer>
-      <Component/>
+    <App store={ store }/>
     </AppContainer>,
     document.getElementById('root')
-  );
-};
+  )
+}
+render(App)
 
-render(App);
-
-// Hot Module Replacement API
 if (module.hot) {
-  module.hot.accept('./components/App', () => {
+  module.hot.accept('./App', () => {
     render(App)
-  });
+  })
 }

@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import editorCss from '../styles/Editor.css'
-import { Link } from 'react-router-dom'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { editArticle, addArticle } from '../store/actions'
 
 class Editor extends Component{
-  constructor ({ article, onAdd, onEdit }) {
+  constructor ({ articles, match, actions }) {
     super()
-    this.state = article
+    const id = match.params.id
+    this.state = id ? articles.filter((article) => article.id === id)[0] : { title: '', content: '' }
   }
   handleTitleChange (event){
     this.setState({ title: event.target.value })
@@ -16,9 +19,8 @@ class Editor extends Component{
   handleSubmit (event){
     event.preventDefault()
     this.state.id ?
-    this.props.onEdit(this.state.id, Object.assign(this.state, { updatedAt: Date.now() })) :
-    this.props.onAdd({ createdAt: Date.now(), updatedAt: Date.now(), comments: [], ...this.state })
-    alert('提交成功');
+    this.props.actions.editArticle(this.state.id, this.state) :
+    this.props.actions.addArticle(this.state)
   }
   render () {
     return (
@@ -33,4 +35,10 @@ class Editor extends Component{
     )
   }
 }
-export default Editor
+const mapStateToProps = (state) => ({ articles: state.articles })
+const mapDispatchToProps = (dispatch) => ({ actions: bindActionCreators({ editArticle, addArticle }, dispatch) })
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Editor)
