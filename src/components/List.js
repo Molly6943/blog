@@ -10,4 +10,5 @@ const List = ({ articles }) => (
 )
 
 const mapStateToProps = (state) => ({ articles: state.articles })
-export default connect(mapStateToProps)(List)
+
+export default connect(mapStateToProps, null)(List)

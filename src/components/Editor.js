@@ -7,7 +7,7 @@ import { editArticle, addArticle } from '../store/actions'
 class Editor extends Component{
   constructor ({ articles, match, actions }) {
     super()
-    const id = match.params.id
+    const id = Number(match.params.id)
     this.state = id ? articles.filter((article) => article.id === id)[0] : { title: '', content: '' }
   }
   handleTitleChange (event){

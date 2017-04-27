@@ -2,7 +2,7 @@ import { ADD_ARTICLE, DELETE_ARTICLE, EDIT_ARTICLE, ADD_COMMENT } from './types'
 import { $uid } from '../util'
 
 export default function articles (state = [], action){
-  console.log(action)
+  console.log(JSON.stringify(action))
   switch (action.type) {
     case ADD_ARTICLE:
       return [
@@ -16,7 +16,6 @@ export default function articles (state = [], action){
         ...state
       ]
     case DELETE_ARTICLE:
-      console.log(action)
       return state.filter((ARTICLE) => ARTICLE.id !== action.id)
     case EDIT_ARTICLE:
       return state.map(
