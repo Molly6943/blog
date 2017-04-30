@@ -2,15 +2,18 @@ import React, { Component } from 'react'
 import editorCss from '../styles/Editor.css'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { editArticle, addArticle, bombAction } from '../store/actions'
+import { editArticle, addArticle } from '../store/actions'
 import BombBox from './BombBox'
 
 class Editor extends Component{
-  constructor ({ articles, match, actions }) {
-    console.log('133' + JSON.stringify(articles))
+  constructor ({ articles, match, actions, history }) {
+    console.log(history)
     super()
     const id = Number(match.params.id)
-    this.state = id ? articles.filter((article) => article.id === id)[0] : { title: '', content: '' }
+    this.state = {
+      article: id ? articles.filter((article) => article.id === id)[0] : { title: '', content: '' },
+      isShown: false
+    }
   }
   handleTitleChange (event){
     this.setState({ title: event.target.value })
@@ -20,20 +23,24 @@ class Editor extends Component{
   }
   handleSubmit (event){
     event.preventDefault()
-    this.state.id ?
+    this.state.article.id ?
     this.props.actions.editArticle(this.state.id, this.state) :
     this.props.actions.addArticle(this.state)
+    let isShown = this.state.isShown
+    this.setState({ isShown: !isShown })
   }
   leftClick () {
-    this.props.actions.BombAction(false)
+    let isShown = this.state.isShown
+    this.setState({ isShown: !this.state.isShown })
   }
   rightClick () {
-    // this.context.router.push('/articles')
-    this.props.actions.BombAction(false)
+    let isShown = this.state.isShown
+    this.props.history.push('/')
+    this.setState({ isShown: !this.state.isShown })
   }
   render () {
     const content = <p><span>提示语</span></p>
-    const bombStatus = this.props.articles.map((item) => item.bombStatus)
+    const bombStatus = this.state.isShown
     return (
       <div className="write-essay">
         <h1 className="write-title">How about writing an article？</h1>
@@ -42,7 +49,7 @@ class Editor extends Component{
             <textarea className="input-content" placeholder="  enter content(support markdown)" value={this.state.content} onChange={this.handleContentChange.bind(this)} />
             <input className="submit-button" type="submit" value="submit"/>
           </form>
-            <div>
+          <div>
             {
               bombStatus ?
               <BombBox
@@ -50,19 +57,19 @@ class Editor extends Component{
                 content={content}
                 leftText="取消"
                 rightText="确认"
-                leftClick={this.leftClick}
-                rightClick={this.rightClick} />
+                leftClick={this.leftClick.bind(this)}
+                rightClick={this.rightClick.bind(this)} />
                 : false
             }
-          </div>
-            </div>
+        </div>
+      </div>
 
     )
   }
 }
 
 const mapStateToProps = (state) => ({ articles: state.articles })
-const mapDispatchToProps = (dispatch) => ({ actions: bindActionCreators({ editArticle, addArticle, bombAction }, dispatch) })
+const mapDispatchToProps = (dispatch) => ({ actions: bindActionCreators({ editArticle, addArticle }, dispatch) })
 
 export default connect(
   mapStateToProps,

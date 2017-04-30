@@ -9,7 +9,7 @@
 }
 .wins {
     position: absolute;
-    margin-top: 50%;
+    margin-top: 0%;
     background: #fff;
     width: 80%;
     margin-left: 10%;
@@ -30,14 +30,16 @@
     width: 8em;
     line-height: 3em;
     border-radius: 4px;
+    text-align: center;
 }
 .left-btn {
     float: left;
-    color: #eee;
+    color: #fff;
+    background-color: grey
 }
 .right-btn {
-    float: right;
+    float: left;
     border: 1px solid #eee;
-    background: #eee;
+    background: #ffd524;
     color: #fff;
 }
