@@ -15,20 +15,14 @@ class Editor extends Component{
     }
   }
   handleTitleChange (event){
-    // this.state.article.title = event.target.value
-    // this.setState({ title: event.target.value })
     const new_title = event.target.value
     this.setState((prevState) => {
-      console.log('122' + prevState)
       const newState = Object.assign({}, prevState)
-      console.log('123' + newState)
       newState.article.title = new_title
       return newState
     }, () => console.log(this.state))
   }
   handleContentChange (event){
-    // this.state.article.content = event.target.value
-    // this.setState({ content: event.target.value })
     const new_content = event.target.value
     this.setState((prevState) => {
       const newState = Object.assign({}, prevState)
@@ -39,11 +33,10 @@ class Editor extends Component{
   handleSubmit (event){
     event.preventDefault()
     this.state.article.id ?
-    this.props.actions.editArticle(this.state.id, this.state) :
-    this.props.actions.addArticle(this.state)
+    this.props.actions.editArticle(this.state.article.id, this.state) :
+    this.props.actions.addArticle(this.state.article)
     let isShown = this.state.isShown
     this.setState({ isShown: !isShown })
-    console.log(this.props.actions.addArticle(this.state))
   }
   leftClick () {
     this.setState({ isShown: !this.state.isShown })
