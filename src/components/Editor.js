@@ -7,7 +7,6 @@ import BombBox from './BombBox'
 
 class Editor extends Component{
   constructor ({ articles, match, actions, history }) {
-    console.log(history)
     super()
     const id = Number(match.params.id)
     this.state = {
@@ -16,10 +15,26 @@ class Editor extends Component{
     }
   }
   handleTitleChange (event){
-    this.setState({ title: event.target.value })
+    // this.state.article.title = event.target.value
+    // this.setState({ title: event.target.value })
+    const new_title = event.target.value
+    this.setState((prevState) => {
+      console.log('122' + prevState)
+      const newState = Object.assign({}, prevState)
+      console.log('123' + newState)
+      newState.article.title = new_title
+      return newState
+    }, () => console.log(this.state))
   }
   handleContentChange (event){
-    this.setState({ content: event.target.value })
+    // this.state.article.content = event.target.value
+    // this.setState({ content: event.target.value })
+    const new_content = event.target.value
+    this.setState((prevState) => {
+      const newState = Object.assign({}, prevState)
+      newState.article.content = new_content
+      return newState
+    }, () => console.log(this.state))
   }
   handleSubmit (event){
     event.preventDefault()
@@ -28,13 +43,12 @@ class Editor extends Component{
     this.props.actions.addArticle(this.state)
     let isShown = this.state.isShown
     this.setState({ isShown: !isShown })
+    console.log(this.props.actions.addArticle(this.state))
   }
   leftClick () {
-    let isShown = this.state.isShown
     this.setState({ isShown: !this.state.isShown })
   }
   rightClick () {
-    let isShown = this.state.isShown
     this.props.history.push('/')
     this.setState({ isShown: !this.state.isShown })
   }
@@ -45,8 +59,8 @@ class Editor extends Component{
       <div className="write-essay">
         <h1 className="write-title">How about writing an article？</h1>
           <form onSubmit={this.handleSubmit.bind(this)}>
-            <input className="input-title" type="text" placeholder=" enter title" value={this.state.title} onChange={this.handleTitleChange.bind(this)} />
-            <textarea className="input-content" placeholder="  enter content(support markdown)" value={this.state.content} onChange={this.handleContentChange.bind(this)} />
+            <input className="input-title" type="text" placeholder=" enter title" value={this.state.article.title} onChange={this.handleTitleChange.bind(this)} />
+            <textarea className="input-content" placeholder="  enter content(support markdown)" value={this.state.article.content} onChange={this.handleContentChange.bind(this)} />
             <input className="submit-button" type="submit" value="submit"/>
           </form>
           <div>

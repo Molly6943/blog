@@ -6,7 +6,7 @@ import { $db } from './util'
 import App from './App';
 import AppStore from './store'
 
-const persistedState = $db.get('reduxState') || []
+const persistedState = $db.get('reduxState') || { articles: [] }
 const store = createStore(AppStore, persistedState)
 store.subscribe(() => { $db.set('reduxState', store.getState()) })
 const render = (App) => {
