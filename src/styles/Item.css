@@ -12,23 +12,15 @@
 }
 .edit-article {
     display: inline-block;
-    margin-left: 20px;
-    width: 100px;
-    line-height: 30px;
-    text-align: center;
-    height: 30px;
-    background: #ffd524;
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-    box-shadow: 0 3px 0 #daae1d;
-    border-radius: 6px;
 }
 .edit-article a {
     text-decoration: none;
     color: #fff;
     text-align: center;
 }
-.remove-button {
+.remove-button,.edit-article button {
     display: inline-block;
+    outline: none;
     margin-left: 20px;
     width: 100px;
     line-height: 30px;
@@ -42,6 +34,6 @@
     color: #fff;
     box-shadow: 0 3px 0 #daae1d;
 }
-.item p{
+.item p {
     padding: 20px;
 }

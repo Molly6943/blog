@@ -9,6 +9,8 @@ input, textarea {
     padding: 20px;
 }
 .write-essay input, .write-essay textarea {
+    box-sizing: border-box;
+    padding-left: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 18px;

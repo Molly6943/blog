@@ -15,6 +15,7 @@ class Editor extends Component{
       isShown: false
     }
   }
+
   handleTitleChange (event){
     const new_title = event.target.value
     this.setState((prevState) => {
@@ -22,15 +23,19 @@ class Editor extends Component{
       newState.article.title = new_title
       return newState
     }, () => console.log(this.state))
+    // console.log(JSON.stringify(this.state.article))
+    // this.setState({ article: Object.assign({}, this.state.article, { title: new_title }) })
   }
+
   handleContentChange (event){
     const new_content = event.target.value
     this.setState((prevState) => {
       const newState = Object.assign({}, prevState)
       newState.article.content = new_content
       return newState
-    }, () => console.log(this.state))
+    })
   }
+
   handleSubmit (event){
     event.preventDefault()
     this.state.article.id ?
@@ -39,39 +44,41 @@ class Editor extends Component{
     let isShown = this.state.isShown
     this.setState({ isShown: !isShown })
   }
+
   leftClick () {
     this.setState({ isShown: !this.state.isShown })
   }
+
   rightClick () {
     this.props.history.push('/')
     this.setState({ isShown: !this.state.isShown })
   }
+
   render () {
     const content = <p><span>提示语</span></p>
     const bombStatus = this.state.isShown
     return (
       <div className="write-essay">
         <h1 className="write-title">How about writing an article？</h1>
-          <form onSubmit={this.handleSubmit.bind(this)}>
-            <input className="input-title" type="text" placeholder=" enter title" value={this.state.article.title} onChange={this.handleTitleChange.bind(this)} />
-            <textarea className="input-content" placeholder="  enter content(support markdown)" value={this.state.article.content} onChange={this.handleContentChange.bind(this)} />
-            <input className="submit-button" type="submit" value="submit"/>
-          </form>
-          <div>
-            {
-              bombStatus ?
-              <BombBox
-                title="确定提交吗？"
-                content={content}
-                leftText="取消"
-                rightText="确认"
-                leftClick={this.leftClick.bind(this)}
-                rightClick={this.rightClick.bind(this)} />
-                : false
-            }
+        <form onSubmit={ this.handleSubmit.bind(this) }>
+          <input className="input-title" type="text" placeholder="enter title" value={this.state.article.title} onChange={ this.handleTitleChange.bind(this) } />
+          <textarea className="input-content" placeholder="enter content(support markdown)" value={this.state.article.content} onChange={ this.handleContentChange.bind(this) } />
+          <input className="submit-button" type="submit" value="submit"/>
+        </form>
+        <div>
+          {
+            bombStatus ?
+            <BombBox
+              title="确定提交吗？"
+              content={content}
+              leftText="取消"
+              rightText="确认"
+              leftClick={this.leftClick.bind(this)}
+              rightClick={this.rightClick.bind(this)} />
+              : false
+          }
         </div>
       </div>
-
     )
   }
 }

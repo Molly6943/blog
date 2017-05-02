@@ -8,21 +8,25 @@ import { addComment } from '../store/actions'
 import { $md2html } from '../util'
 
 const Article = ({ match, articles, actions }) => {
-  console.log(articles)
   const article = articles.filter((article) => article.id === Number(match.params.id))[0]
+
   const handleCommend = (article) => {
     actions.addComment(match.params.id, article)
   }
-  return <div className="article">
-      <h1> {article.title} </h1>
+
+  return (
+    <div className="article">
+      <h1>{article.title}</h1>
       <p>Post At: {new Date(article.createdAt).toLocaleString()}</p>
       <p>Last Modify: {new Date(article.updatedAt).toLocaleString()}</p>
       <p dangerouslySetInnerHTML={ $md2html(article.content) } />
-      <CommentList comments = { article.comments } />
-      <CommentBox onCommend = { handleCommend } />
+      <CommentList comments={article.comments} />
+      <CommentBox onCommend={handleCommend} />
     </div>
+  )
 }
 
 const mapStateToProps = (state) => ({ articles: state.articles })
 const mapDispatchToProps = (dispatch) => ({ actions: bindActionCreators({ addComment }, dispatch) })
+
 export default connect(mapStateToProps, mapDispatchToProps)(Article)

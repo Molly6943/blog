@@ -8,19 +8,25 @@ import { deleteArticle } from '../store/actions'
 
 const Item = ({ article, actions }) => {
   const onArticleRemove = () => window.confirm('Are you sure?') ? actions.deleteArticle(article.id) : false
-  return <li className="item">
-     <h1>
+
+  return (
+    <li className="item">
+      <h1>
        <Link to={`/articles/${ article.id }`}> {article.title } </Link>
-     </h1>
-     <div className="edit-article">
-      <Link to={ `/articles/${ article.id }/edit`}> Edit </Link>
-     </div>
-     <button className="remove-button" onClick={ onArticleRemove }> Remove </button>
-     <p dangerouslySetInnerHTML={ $md2html(article.content) } />
-     <p>Post At:{new Date(article.createdAt).toLocaleString()} </p>
-     <p>last Modify:{new Date(article.updatedAt).toLocaleString()}</p>
+      </h1>
+      <div className="edit-article">
+        <Link to={ `/articles/${ article.id }/edit`}>
+          <button>Edit</button>
+        </Link>
+      </div>
+      <button className="remove-button" onClick={ onArticleRemove }> Remove </button>
+      <p dangerouslySetInnerHTML={ $md2html(article.content) } />
+      <p>Post At:{new Date(article.createdAt).toLocaleString()} </p>
+      <p>last Modify:{new Date(article.updatedAt).toLocaleString()}</p>
    </li>
+  )
 }
 
 const mapDispatchToProps = (dispatch) => ({ actions: bindActionCreators({ deleteArticle }, dispatch) })
+
 export default connect(null, mapDispatchToProps)(Item)
