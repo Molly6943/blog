@@ -12,7 +12,7 @@ store.subscribe(() => { $db.set('reduxState', store.getState()) })
 const render = (App) => {
   ReactDOM.render(
     <AppContainer>
-    <App store={ store }/>
+      <App store={ store }/>
     </AppContainer>,
     document.getElementById('root')
   )

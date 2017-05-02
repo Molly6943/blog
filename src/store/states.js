@@ -15,20 +15,22 @@ export default function articles (state = [], action){
         ...state
       ]
     case DELETE_ARTICLE:
-      return state.filter((ARTICLE) => ARTICLE.id !== action.id)
+      return state.filter((article) => article.id !== action.id)
     case EDIT_ARTICLE:
       return state.map(
-        (ARTICLE) => (
-          ARTICLE.id === action.id ?
-          { ...ARTICLE, ...action.article, updatedAt: Date.now() } :
-          ARTICLE
+        (article) => (
+          article.id === action.id ?
+          { ...article, ...action.article, updatedAt: Date.now() } :
+          article
         )
       )
     case ADD_COMMENT:
       return state.map(
-        (ARTICLE) => {
-          const comments = ARTICLE.comments.unshift({ ...action.comment, createdAt: Date.now() })
-          return ARTICLE.id === action.articleId ? { ...ARTICLE, comments } : ARTICLE
+        (article) => {
+          if (Number(article.id) === Number(action.articleId)) {
+            article.comments.unshift({ ...action.comment, createdAt: Date.now() })
+          }
+          return article
         }
       )
     default:

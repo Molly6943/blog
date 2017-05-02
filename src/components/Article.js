@@ -8,9 +8,10 @@ import { addComment } from '../store/actions'
 import { $md2html } from '../util'
 
 const Article = ({ match, articles, actions }) => {
+  console.log(articles)
   const article = articles.filter((article) => article.id === Number(match.params.id))[0]
-  const handleCommend = ($event) => {
-    actions.addComment(match.params.id, $event)
+  const handleCommend = (article) => {
+    actions.addComment(match.params.id, article)
   }
   return <div className="article">
       <h1> {article.title} </h1>

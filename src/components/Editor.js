@@ -8,6 +8,7 @@ import BombBox from './BombBox'
 class Editor extends Component{
   constructor ({ articles, match, actions, history }) {
     super()
+    console.log(articles)
     const id = Number(match.params.id)
     this.state = {
       article: id ? articles.filter((article) => article.id === id)[0] : { title: '', content: '' },

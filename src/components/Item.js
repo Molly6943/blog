@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import { deleteArticle } from '../store/actions'
 
 const Item = ({ article, actions }) => {
-  const onArticleRemove = () => actions.deleteArticle(article.id)
+  const onArticleRemove = () => window.confirm('Are you sure?') ? actions.deleteArticle(article.id) : false
   return <li className="item">
      <h1>
        <Link to={`/articles/${ article.id }`}> {article.title } </Link>
