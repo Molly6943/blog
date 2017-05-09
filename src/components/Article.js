@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styles from '../styles/Article.css'
 import CommentList from './comments/CommentList'
 import CommentBox from './comments/CommentBox'
@@ -26,7 +27,17 @@ const Article = ({ match, articles, actions }) => {
   )
 }
 
-const mapStateToProps = (state) => ({ articles: state.articles })
-const mapDispatchToProps = (dispatch) => ({ actions: bindActionCreators({ addComment }, dispatch) })
+Article.propTypes = {
+  articles: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    createdAt: PropTypes.number.isRequired,
+    updatedAt: PropTypes.number.isRequired,
+    comments: PropTypes.array.isRequired
+  }).isRequired).isRequired
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Article)
+const mapStateToProps = (state) => ({ articles: state.articles })
+// const mapDispatchToProps = (dispatch) => ({ actions: bindActionCreators({ addComment }, dispatch) })
+
+export default connect(mapStateToProps, null)(Article)

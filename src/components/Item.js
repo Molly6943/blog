@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import styles from '../styles/Item.css'
 import { $md2html } from '../util'
@@ -27,6 +28,15 @@ const Item = ({ article, actions }) => {
   )
 }
 
-const mapDispatchToProps = (dispatch) => ({ actions: bindActionCreators({ deleteArticle }, dispatch) })
+Item.propTypes = {
+  article: PropTypes.objectOf(PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    createdAt: PropTypes.number.isRequired,
+    updatedAt: PropTypes.number.isRequired
+  }).isRequired).isRequired
+}
 
-export default connect(null, mapDispatchToProps)(Item)
+// const mapDispatchToProps = (dispatch) => ({ actions: bindActionCreators({ deleteArticle }, dispatch) })
+
+export default connect()(Item)

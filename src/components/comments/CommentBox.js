@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class CommentBox extends Component {
   constructor ({ comment, onCommend }) {
@@ -44,4 +45,7 @@ class CommentBox extends Component {
   }
 }
 
+CommentBox.propTypes = {
+  onCommend: PropTypes.func.isRequired
+}
 export default CommentBox

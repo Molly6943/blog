@@ -2,6 +2,7 @@ import { ADD_ARTICLE, DELETE_ARTICLE, EDIT_ARTICLE, ADD_COMMENT, BOMB_BOX } from
 import { $uid } from '../util'
 
 export default function articles (state = [], action){
+  console.log(action)
   switch (action.type) {
     case ADD_ARTICLE:
       return [

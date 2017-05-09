@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import styles from '../styles/BombBox.css'
 
 class BombBox extends Component {
@@ -17,6 +18,15 @@ class BombBox extends Component {
       </div>
     )
   }
+}
+
+BombBox.propTypes = {
+  title: PropTypes.string.isRequired,
+  content: PropTypes.object.isRequired,
+  leftText: PropTypes.string.isRequired,
+  rightText: PropTypes.string.isRequired,
+  leftClick: PropTypes.func.isRequired,
+  rightClick: PropTypes.func.isRequired
 }
 
 export default BombBox

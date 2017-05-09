@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import editorCss from '../styles/Editor.css'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -23,8 +24,6 @@ class Editor extends Component{
       newState.article.title = new_title
       return newState
     }, () => console.log(this.state))
-    // console.log(JSON.stringify(this.state.article))
-    // this.setState({ article: Object.assign({}, this.state.article, { title: new_title }) })
   }
 
   handleContentChange (event){
@@ -60,7 +59,7 @@ class Editor extends Component{
     return (
       <div className="write-essay">
         <h1 className="write-title">How about writing an article？</h1>
-        <form onSubmit={ this.handleSubmit.bind(this) }>
+        <form onSubmit = {this.handleSubmit.bind(this)} action="/post/:postID" method="post">
           <input className="input-title" type="text" placeholder="enter title" value={this.state.article.title} onChange={ this.handleTitleChange.bind(this) } />
           <textarea className="input-content" placeholder="enter content(support markdown)" value={this.state.article.content} onChange={ this.handleContentChange.bind(this) } />
           <input className="submit-button" type="submit" value="submit"/>
@@ -75,7 +74,7 @@ class Editor extends Component{
               rightText="确认"
               leftClick={this.leftClick.bind(this)}
               rightClick={this.rightClick.bind(this)} />
-              : false
+            : false
           }
         </div>
       </div>
@@ -83,10 +82,21 @@ class Editor extends Component{
   }
 }
 
+Editor.propTypes = {
+  articles: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    createdAt: PropTypes.number.isRequired,
+    updatedAt: PropTypes.number.isRequired,
+    comments: PropTypes.array.isRequired
+  }).isRequired).isRequired
+}
+
 const mapStateToProps = (state) => ({ articles: state.articles })
-const mapDispatchToProps = (dispatch) => ({ actions: bindActionCreators({ editArticle, addArticle }, dispatch) })
+// const mapDispatchToProps = (dispatch) => ({ actions: bindActionCreators({ editArticle, addArticle }, dispatch) })
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  // mapDispatchToProps
+  null
 )(Editor)
