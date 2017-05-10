@@ -38,6 +38,6 @@ Article.propTypes = {
 }
 
 const mapStateToProps = (state) => ({ articles: state.articles })
-// const mapDispatchToProps = (dispatch) => ({ actions: bindActionCreators({ addComment }, dispatch) })
+const mapDispatchToProps = (dispatch) => ({ actions: bindActionCreators({ addComment }, dispatch) })
 
-export default connect(mapStateToProps, null)(Article)
+export default connect(mapStateToProps, mapDispatchToProps)(Article)

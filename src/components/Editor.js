@@ -93,10 +93,10 @@ Editor.propTypes = {
 }
 
 const mapStateToProps = (state) => ({ articles: state.articles })
-// const mapDispatchToProps = (dispatch) => ({ actions: bindActionCreators({ editArticle, addArticle }, dispatch) })
+const mapDispatchToProps = (dispatch) => ({ actions: bindActionCreators({ editArticle, addArticle }, dispatch) })
 
 export default connect(
   mapStateToProps,
-  // mapDispatchToProps
-  null
+  mapDispatchToProps
+  // null
 )(Editor)

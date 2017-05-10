@@ -23,15 +23,14 @@ export const addArticle = (article) => (dispatch) => {
   ).then(
     (resJson) => {
       if (resJson.status === 200){
-        message.success(resJson.message)
+        console.log(resJson.message)
         dispatch(AddArticle(article))
       } else {
-        message.error(resJson.message);
+        console.log(resJson.message)
       }
     }
   )
 }
-
 
 export const deleteArticle = (id) => (dispatch) => {
   fetch(PATH + `post/${ id }`, {
@@ -48,10 +47,10 @@ export const deleteArticle = (id) => (dispatch) => {
   ).then(
     (resJson) => {
       if (resJson.status === 200){
-        message.success(resJson.message)
+        console.log(resJson.message)
         dispatch(DeleteArticle(id))
       } else {
-        message.error(resJson.message);
+        console.log(resJson.message)
       }
     }
   )
@@ -74,11 +73,10 @@ export const editArticle = (id, article) => (dispatch) => {
   ).then(
     (resJson) => {
       if (resJson.status === 200){
-        message.success(resJson.message)
         console.log(resJson)
         dispatch(EditArticle(article, id))
       } else {
-        message.error(resJson.message);
+        console.log(resJson.message)
       }
     }
   )
@@ -101,11 +99,10 @@ export const addComment = (articleId, comment) => (
   ).then(
     (resJson) => {
       if (resJson.status === 200){
-        message.success(resJson.message)
         console.log(resJson)
         dispatch(AddComment(articleId, comment))
       } else {
-        message.error(resJson.message);
+        console.log(resJson.message)
       }
     }
   )

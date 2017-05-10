@@ -37,6 +37,6 @@ Item.propTypes = {
   }).isRequired).isRequired
 }
 
-// const mapDispatchToProps = (dispatch) => ({ actions: bindActionCreators({ deleteArticle }, dispatch) })
+const mapDispatchToProps = (dispatch) => ({ actions: bindActionCreators({ deleteArticle }, dispatch) })
 
-export default connect()(Item)
+export default connect(mapDispatchToProps)(Item)

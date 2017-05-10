@@ -8,15 +8,10 @@ import App from './App';
 import AppStore from './store'
 import { addArticle, deleteArticle, editArticle, addComment } from './store/actions'
 
-const thunk = thunkMiddleware()
 // const persistedState = $db.get('reduxState') || { articles: [] }
 const persistedState = { articles: [] }
-const store = createStore(AppStore, persistedState, applyMiddleware(thunk))
+const store = createStore(AppStore, persistedState, applyMiddleware(thunkMiddleware))
 // store.subscribe(() => { $db.set('reduxState', store.getState()) })
-store.dispatch(addArticle('reactjs'))
-store.dispatch(deleteArticle('reactjs'))
-store.dispatch(editArticle('reactjs'))
-store.dispatch(addComment('reactjs'))
 
 const render = (App) => {
   ReactDOM.render(
