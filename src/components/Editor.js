@@ -59,7 +59,7 @@ class Editor extends Component{
     return (
       <div className="write-essay">
         <h1 className="write-title">How about writing an article？</h1>
-        <form onSubmit = {this.handleSubmit.bind(this)} action="/post/:postID" method="post">
+        <form onSubmit = {this.handleSubmit.bind(this)} >
           <input className="input-title" type="text" placeholder="enter title" value={this.state.article.title} onChange={ this.handleTitleChange.bind(this) } />
           <textarea className="input-content" placeholder="enter content(support markdown)" value={this.state.article.content} onChange={ this.handleContentChange.bind(this) } />
           <input className="submit-button" type="submit" value="submit"/>
@@ -98,5 +98,4 @@ const mapDispatchToProps = (dispatch) => ({ actions: bindActionCreators({ editAr
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-  // null
 )(Editor)

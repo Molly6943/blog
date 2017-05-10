@@ -18,12 +18,10 @@ const routes = (app) => {
   })
 
   // add article
-  app.post('/post/:postID', function (req, res) {
-    console.log(req.body)
-    let article = new postModel(req.body)
-    article.ID = req.params.postID
+  app.post('/post/newArticle', function (req, res) {
+    let article = new postModel(req.body);
     article.save()
-      .then((returnPost) => res.json(returnPost))
+      .then((returnPost) => res.json({ post: returnPost, status: 200 }))
       .catch((err) => console.log(err))
   })
 
@@ -31,53 +29,54 @@ const routes = (app) => {
   app.get('/post/:postID', function (req, res) {
     let postID = req.params.postID;
     if (postID) {
-      postModel.findOne({ ID: postID })
-        .then((returnPost) => res.json(returnPost))
+      postModel.findOne({ _id: postID })
+        .then((returnPost) => res.json({ post: returnPost, status: 200 }))
         .catch((err) => console.log(err))
+    } else {
+      res.json({ 'status': 500, 'error': err });
     }
-    res.send('end')
   })
 
   // check all article
   app.get('/posts', function (req, res) {
     return postModel.find({})
-      .then((returnPost) => res.json(returnPost))
+      .then((returnPost) => res.json({ post: returnPost, status: 200 }))
       .catch((err) => console.log(err))
-    // res.send('end')
   })
 
   // editor article
   app.put('/post/:postID', function (req, res) {
-    let post = new postModel(req.body);
+    let article = new postModel(req.body);
     let postID = req.params.postID;
     if (postID) {
       postModel.findOneAndUpdate(
-        { ID: postID },
-        { title: post.article, contents: post.contents, comments: post.comments },
+        { _id: postID },
+        { title: article.title, contents: article.contents, comments: article.comments },
         { new: true })
-        .then((returnPost) => res.json(returnPost))
+        .then((returnPost) => res.json({ post: returnPost, status: 200 }))
         .catch((err) => console.log(err))
+    } else {
+      res.json({ 'status': 500, 'error': err });
     }
-    res.send('end')
   })
 
   // delete article
   app.delete('/post/:postID', function (req, res) {
     let postID = req.params.postID;
     if (postID){
-      postModel.find({ ID: postID }).remove()
-        .then(() => console.log('delete successed!'))
+      postModel.find({ _id: postID }).remove()
+        .then((returnPost) => res.status(200).send('delete successed!'))
         .catch((err) => console.log(err))
+    } else {
+      res.json({ 'status': 500, 'error': err });
     }
-    res.send('end')
   })
 
   // add Comments
-  app.post('/post/:commentID', function (req, res) {
-    let comments = new postModel(req.body)
-    comments.ID = req.params.commentID
-    post.save()
-      .then((returnComment) => res.json(returnComment))
+  app.post('/post/newComment', function (req, res) {
+    let comments = new postModel(req.body);
+    comments.save()
+      .then((returnComment) => res.json({ comment: returnComment, status: 200 }))
       .catch((err) => console.log(err))
   })
 }

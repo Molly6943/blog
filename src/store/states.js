@@ -1,5 +1,5 @@
-import { ADD_ARTICLE, DELETE_ARTICLE, EDIT_ARTICLE, ADD_COMMENT, BOMB_BOX } from './types'
-import { $uid } from '../util'
+import { ADD_ARTICLE, DELETE_ARTICLE, EDIT_ARTICLE, ADD_COMMENT, BOMB_BOX, ALL_ARTICLE } from './types'
+// import { $uid } from '../util'
 
 export default function articles (state = [], action){
   console.log(action)
@@ -8,7 +8,7 @@ export default function articles (state = [], action){
       return [
         {
           ...action.article,
-          id: $uid.generate(),
+          // id: $uid.generate(),
           updatedAt: Date.now(),
           createdAt: Date.now(),
           comments: []
@@ -34,6 +34,8 @@ export default function articles (state = [], action){
           return article
         }
       )
+    case ALL_ARTICLE:
+      return state
     default:
       return state
   }
