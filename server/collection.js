@@ -14,9 +14,9 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 const Schema = mongoose.Schema;
 const postSchema = new Schema({
   title: String,
-  contents: String,
-  comments: [{ name: String, content: String }]
-});
+  content: String,
+  comments: [{ name: String, content: String, createdAt: { type: Date, required: true, default: Date.now } }]
+}, { timestamps: {} });
 
 const postModel = mongoose.model('postModel', postSchema);
 

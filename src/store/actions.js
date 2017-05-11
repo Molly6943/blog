@@ -5,27 +5,27 @@ const AddArticle = (article) => ({ type: types.ADD_ARTICLE, article })
 const DeleteArticle = (id) => ({ type: types.DELETE_ARTICLE, id })
 const EditArticle = (article, id) => ({ type: types.EDIT_ARTICLE, id, article })
 const AddComment = (articleId, comment) => ({ type: types.ADD_COMMENT, articleId, comment })
-const AllArticle = () => ({ type: types.ALL_ARTICLE })
+export const allArticle = (articles) => ({ type: types.ALL_ARTICLE, articles })
 
-export const allArticle = () => (dispatch) => {
-  fetch(PATH + 'posts', {
-    method: 'get',
-    mode: 'cors',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    }
-  }).then(
-    (res) => res.json()
-  ).then(
-    (resJson) => {
-      if (resJson.status === 200){
-        dispatch(AllArticle(article))
-      } else {
-        console.log(1)
-      }
-    }
-  )
-}
+// export const allArticle = (articles) => (dispatch) => {
+//   fetch(PATH + 'posts', {
+//     method: 'get',
+//     mode: 'cors',
+//     headers: {
+//       'Content-Type': 'application/x-www-form-urlencoded'
+//     }
+//   }).then(
+//     (res) => res.json()
+//   ).then(
+//     (resJson) => {
+//       if (resJson.status === 200){
+//         dispatch(AllArticle(articles))
+//       } else {
+//         console.log(1)
+//       }
+//     }
+//   )
+// }
 
 export const addArticle = (article) => (dispatch) => {
   fetch(PATH + 'post/newArticle', {
@@ -52,14 +52,14 @@ export const addArticle = (article) => (dispatch) => {
 }
 
 export const deleteArticle = (id) => (dispatch) => {
-  fetch(PATH + `post/${ id }`, {
+  fetch(PATH + `post/${ _id }`, {
     method: 'delete',
     mode: 'cors',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
     body: $jsonPostBody({
-      id: id
+      id: _id
     })
   }).then(
     (res) => res.json()
@@ -75,7 +75,7 @@ export const deleteArticle = (id) => (dispatch) => {
 }
 
 export const editArticle = (id, article) => (dispatch) => {
-  fetch(PATH + `post/${id}`, {
+  fetch(PATH + `post/${_id}`, {
     method: 'put',
     mode: 'cros',
     headers: {
@@ -84,7 +84,7 @@ export const editArticle = (id, article) => (dispatch) => {
     body: $jsonPostBody({
       article: article.title,
       content: article.content,
-      id: id
+      id: _id
     })
   }).then(
     (res) => res.json()
@@ -101,7 +101,7 @@ export const editArticle = (id, article) => (dispatch) => {
 }
 
 export const addComment = (articleId, comment) => (
-  fetch(PATH + `post/${id}`, {
+  fetch(PATH + 'post/newArticle', {
     method: 'post',
     mode: 'cros',
     headers: {
@@ -109,8 +109,7 @@ export const addComment = (articleId, comment) => (
     },
     body: $jsonPostBody({
       name: comment.title,
-      content: comment.content,
-      commentID: comment.commentID
+      content: comment.content
     })
   }).then(
     (res) => res.json()

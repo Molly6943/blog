@@ -9,7 +9,7 @@ import { addComment } from '../store/actions'
 import { $md2html } from '../util'
 
 const Article = ({ match, articles, actions }) => {
-  const article = articles.filter((article) => article.id === Number(match.params.id))[0]
+  const article = articles.filter((article) => article._id === Number(match.params.id))[0]
 
   const handleCommend = (article) => {
     actions.addComment(match.params.id, article)
@@ -27,15 +27,15 @@ const Article = ({ match, articles, actions }) => {
   )
 }
 
-Article.propTypes = {
-  articles: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
-    createdAt: PropTypes.number.isRequired,
-    updatedAt: PropTypes.number.isRequired,
-    comments: PropTypes.array.isRequired
-  }).isRequired).isRequired
-}
+// Article.propTypes = {
+//   articles: PropTypes.arrayOf(PropTypes.shape({
+//     title: PropTypes.string.isRequired,
+//     content: PropTypes.string.isRequired,
+//     createdAt: PropTypes.number.isRequired,
+//     updatedAt: PropTypes.number.isRequired,
+//     comments: PropTypes.array.isRequired
+//   }).isRequired).isRequired
+// }
 
 const mapStateToProps = (state) => ({ articles: state.articles })
 const mapDispatchToProps = (dispatch) => ({ actions: bindActionCreators({ addComment }, dispatch) })

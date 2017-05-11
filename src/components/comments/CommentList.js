@@ -4,11 +4,11 @@ import Comment from './Comment'
 
 const CommentList = ({ comments }) =>
   <div className="commentList">
-    { comments.map((comment) => (<Comment key={comment.createdAt} comment={comment} />)) }
+    { comments.map((comment) => (<Comment key={comment.name} comment={comment} />)) }
   </div>
 
-CommentList.propTypes = {
-  comments: PropTypes.array.isRequired
-}
+// CommentList.propTypes = {
+//   comments: PropTypes.array.isRequired
+// }
 
 export default CommentList

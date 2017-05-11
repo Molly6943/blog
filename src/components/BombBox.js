@@ -20,13 +20,13 @@ class BombBox extends Component {
   }
 }
 
-BombBox.propTypes = {
-  title: PropTypes.string.isRequired,
-  content: PropTypes.object.isRequired,
-  leftText: PropTypes.string.isRequired,
-  rightText: PropTypes.string.isRequired,
-  leftClick: PropTypes.func.isRequired,
-  rightClick: PropTypes.func.isRequired
-}
+// BombBox.propTypes = {
+//   title: PropTypes.string.isRequired,
+//   content: PropTypes.object.isRequired,
+//   leftText: PropTypes.string.isRequired,
+//   rightText: PropTypes.string.isRequired,
+//   leftClick: PropTypes.func.isRequired,
+//   rightClick: PropTypes.func.isRequired
+// }
 
 export default BombBox

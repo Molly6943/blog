@@ -45,7 +45,7 @@ class CommentBox extends Component {
   }
 }
 
-CommentBox.propTypes = {
-  onCommend: PropTypes.func.isRequired
-}
+// CommentBox.propTypes = {
+//   onCommend: PropTypes.func.isRequired
+// }
 export default CommentBox

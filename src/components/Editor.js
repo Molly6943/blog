@@ -9,10 +9,9 @@ import BombBox from './BombBox'
 class Editor extends Component{
   constructor ({ articles, match, actions, history }) {
     super()
-    console.log(articles)
     const id = Number(match.params.id)
     this.state = {
-      article: id ? articles.filter((article) => article.id === id)[0] : { title: '', content: '' },
+      article: id ? articles.filter((article) => article._id === id)[0] : { title: '', content: '' },
       isShown: false
     }
   }
@@ -23,7 +22,7 @@ class Editor extends Component{
       const newState = Object.assign({}, prevState)
       newState.article.title = new_title
       return newState
-    }, () => console.log(this.state))
+    })
   }
 
   handleContentChange (event){
@@ -35,20 +34,24 @@ class Editor extends Component{
     })
   }
 
-  handleSubmit (event){
-    event.preventDefault()
-    this.state.article.id ?
-    this.props.actions.editArticle(this.state.article.id, this.state) :
-    this.props.actions.addArticle(this.state.article)
-    let isShown = this.state.isShown
-    this.setState({ isShown: !isShown })
-  }
+  // handleSubmit (event){
+    // event.preventDefault()
+    // this.state.article._id ?
+    // this.props.actions.editArticle(this.state.article._id, this.state) :
+    // this.props.actions.addArticle(this.state.article)
+    // let isShown = this.state.isShown
+    // this.setState({ isShown: !isShown })
+  // }
 
   leftClick () {
     this.setState({ isShown: !this.state.isShown })
   }
 
   rightClick () {
+    event.preventDefault()
+    this.state.article._id ?
+    this.props.actions.editArticle(this.state.article._id, this.state) :
+    this.props.actions.addArticle(this.state.article)
     this.props.history.push('/')
     this.setState({ isShown: !this.state.isShown })
   }
@@ -59,7 +62,7 @@ class Editor extends Component{
     return (
       <div className="write-essay">
         <h1 className="write-title">How about writing an article？</h1>
-        <form onSubmit = {this.handleSubmit.bind(this)} >
+        <form onSubmit = {this.rightClick.bind(this)} >
           <input className="input-title" type="text" placeholder="enter title" value={this.state.article.title} onChange={ this.handleTitleChange.bind(this) } />
           <textarea className="input-content" placeholder="enter content(support markdown)" value={this.state.article.content} onChange={ this.handleContentChange.bind(this) } />
           <input className="submit-button" type="submit" value="submit"/>
@@ -81,16 +84,16 @@ class Editor extends Component{
     )
   }
 }
-
-Editor.propTypes = {
-  articles: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
-    createdAt: PropTypes.number.isRequired,
-    updatedAt: PropTypes.number.isRequired,
-    comments: PropTypes.array.isRequired
-  }).isRequired).isRequired
-}
+//
+// Editor.propTypes = {
+//   articles: PropTypes.arrayOf(PropTypes.shape({
+//     title: PropTypes.string.isRequired,
+//     content: PropTypes.string.isRequired,
+//     createdAt: PropTypes.number.isRequired,
+//     updatedAt: PropTypes.number.isRequired,
+//     comments: PropTypes.array.isRequired
+//   }).isRequired).isRequired
+// }
 
 const mapStateToProps = (state) => ({ articles: state.articles })
 const mapDispatchToProps = (dispatch) => ({ actions: bindActionCreators({ editArticle, addArticle }, dispatch) })

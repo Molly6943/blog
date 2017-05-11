@@ -2,7 +2,6 @@ import { ADD_ARTICLE, DELETE_ARTICLE, EDIT_ARTICLE, ADD_COMMENT, BOMB_BOX, ALL_A
 // import { $uid } from '../util'
 
 export default function articles (state = [], action){
-  console.log(action)
   switch (action.type) {
     case ADD_ARTICLE:
       return [
@@ -16,11 +15,11 @@ export default function articles (state = [], action){
         ...state
       ]
     case DELETE_ARTICLE:
-      return state.filter((article) => article.id !== action.id)
+      return state.filter((article) => article._id !== action._id)
     case EDIT_ARTICLE:
       return state.map(
         (article) => (
-          article.id === action.id ?
+          article._id === action._id ?
           { ...article, ...action.article, updatedAt: Date.now() } :
           article
         )
@@ -28,14 +27,14 @@ export default function articles (state = [], action){
     case ADD_COMMENT:
       return state.map(
         (article) => {
-          if (Number(article.id) === Number(action.articleId)) {
+          if (Number(article._id) === Number(action.articleId)) {
             article.comments.unshift({ ...action.comment, createdAt: Date.now() })
           }
           return article
         }
       )
     case ALL_ARTICLE:
-      return state
+      return [...action.articles, ...state]
     default:
       return state
   }

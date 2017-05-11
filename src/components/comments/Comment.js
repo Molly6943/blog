@@ -8,12 +8,12 @@ const Comment = ({ comment }) =>
       <div className="commnent_time"> {new Date(comment.createdAt).toLocaleString()} </div>
     </div>
 
-Comment.propTypes = {
-  comment: PropTypes.objectOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
-    createdAt: PropTypes.number.isRequired
-  }).isRequired).isRequired
-}
+// Comment.propTypes = {
+//   comment: PropTypes.objectOf(PropTypes.shape({
+//     name: PropTypes.string.isRequired,
+//     content: PropTypes.string.isRequired,
+//     createdAt: PropTypes.number.isRequired
+//   }).isRequired).isRequired
+// }
 
 export default Comment
