@@ -10,7 +10,7 @@ import styles from './styles/App.css'
 export default (
   <div className="app">
     <div className="main-header">
-      <img className="main-header__avatar" src="img/avatar.png"/>
+      <img className="main-header__avatar" src="/img/avatar.png"/>
       <h1>Hi,I am Meng Meng</h1>
     </div>
     <div className="main-nav">

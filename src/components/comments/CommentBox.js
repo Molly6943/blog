@@ -6,7 +6,9 @@ class CommentBox extends Component {
     super()
     this.state = {
       name: '',
-      content: ''
+      content: '',
+      createdAt: Date.now(),
+      _id: Date.now()
     }
   }
 

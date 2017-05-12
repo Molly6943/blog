@@ -31,7 +31,7 @@ module.exports = {
             // necessary for HMR to know where to load the hot update chunks
   },
 
-  devtool: 'inline-source-map',
+  // devtool: 'inline-source-map',
 
   devServer: {
     hot: true,
@@ -42,6 +42,13 @@ module.exports = {
 
     publicPath: '/'
             // match the output `publicPath`
+
+    // proxy: {
+    //   '/articles/*': {
+    //     target: 'http://localhost:8081',
+    //     secure: false
+    //   }
+    // }
   },
 
   module: {
@@ -59,10 +66,10 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
+    new webpack.HotModuleReplacementPlugin()
         // enable HMR globally
 
-    new webpack.NamedModulesPlugin()
+    // new webpack.NamedModulesPlugin()
         // prints more readable module names in the browser console on HMR updates
   ]
 };

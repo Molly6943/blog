@@ -20,8 +20,10 @@ export default function articles (state = [], action){
       return state.map(
         (article) => {
           if (article._id === action.articleId) {
-            console.log(article.comments)
+            console.log('article: ', article)
+            console.log('action.comment', action.comment)
             article.comments.unshift({ ...action.comment })
+            console.log('action.comment unshift : ', article.comments)
           }
           return article
         }

@@ -13,6 +13,8 @@ const persistedState = { articles: [] }
 const store = createStore(AppStore, persistedState, applyMiddleware(thunkMiddleware))
 // store.subscribe(() => { $db.set('reduxState', store.getState()) })
 
+// window.defaultStore = store
+
 const render = (App) => {
   ReactDOM.render(
     <AppContainer>

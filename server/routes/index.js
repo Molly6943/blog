@@ -1,7 +1,10 @@
 const bodyParser = require('body-parser');
 const { postModel } = require('../collection.js');
+const morgan = require('morgan')
+const path = require('path')
 
 const routes = (app) => {
+  app.use(morgan('dev'))
   app.use(bodyParser.urlencoded({ extended: true }))
   app.use(bodyParser.json());
 
@@ -14,7 +17,7 @@ const routes = (app) => {
 
   app.get('/', function (req, res) {
     console.log('主页GET请求');
-    res.send('hello get');
+    res.send(path.resolve('dist/index.html'));
   })
 
   // add article
@@ -86,7 +89,13 @@ const routes = (app) => {
       res.json({ 'status': 500, 'error': err });
     }
   })
+
+  app.get('*', function (req, res) {
+    console.log('主页GET请求');
+    res.sendFile(path.resolve('../dist/index.html'));
+  })
 }
+
 
 
 module.exports = routes;
