@@ -22,7 +22,7 @@ const routes = (app) => {
     let article = new postModel(req.body);
     article.save()
       .then((returnPost) => res.json({ post: returnPost, status: 200 }))
-      .catch((err) => console.log(err))
+      .catch((err) => res.status(400).send({ message: getErrorMessage(err) }))
   })
 
   // check single article
@@ -31,7 +31,7 @@ const routes = (app) => {
     if (postID) {
       postModel.findOne({ _id: postID })
         .then((returnPost) => res.json({ post: returnPost, status: 200 }))
-        .catch((err) => console.log(err))
+        .catch((err) => res.status(400).send({ message: getErrorMessage(err) }))
     } else {
       res.json({ 'status': 500, 'error': err });
     }
@@ -41,7 +41,7 @@ const routes = (app) => {
   app.get('/posts', function (req, res) {
     return postModel.find({})
       .then((returnPost) => res.json({ post: returnPost, status: 200 }))
-      .catch((err) => console.log(err))
+      .catch((err) => res.status(400).send({ message: getErrorMessage(err) }))
   })
 
   // editor article
@@ -51,10 +51,10 @@ const routes = (app) => {
     if (postID) {
       postModel.findOneAndUpdate(
         { _id: postID },
-        { title: article.title, contents: article.contents, comments: article.comments },
+        { title: article.title, content: article.content, comments: article.comments },
         { new: true })
         .then((returnPost) => res.json({ post: returnPost, status: 200 }))
-        .catch((err) => console.log(err))
+        .catch((err) => res.status(400).send({ message: getErrorMessage(err) }))
     } else {
       res.json({ 'status': 500, 'error': err });
     }
@@ -66,18 +66,25 @@ const routes = (app) => {
     if (postID){
       postModel.find({ _id: postID }).remove()
         .then((returnPost) => res.status(200).send('delete successed!'))
-        .catch((err) => console.log(err))
+        .catch((err) => res.status(400).send({ message: getErrorMessage(err) }))
     } else {
       res.json({ 'status': 500, 'error': err });
     }
   })
 
   // add Comments
-  app.post('/post/newComment', function (req, res) {
-    let comments = new postModel(req.body);
-    comments.save()
-      .then((returnComment) => res.json(returnComment))
-      .catch((err) => console.log(err))
+  app.post('/post/newComment/:postID', function (req, res) {
+    let postID = req.params.postID;
+    if (postID){
+      postModel.findOneAndUpdate(
+        { _id: postID },
+        { $addToSet: { comments: { name: req.body.name, content: req.body.content } } },
+        { new: true })
+        .then((returnPost) => res.json({ post: returnPost, status: 200 }))
+        .catch((err) => res.status(400).send({ message: getErrorMessage(err) }))
+    } else {
+      res.json({ 'status': 500, 'error': err });
+    }
   })
 }
 

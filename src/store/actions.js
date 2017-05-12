@@ -42,8 +42,6 @@ export const deleteArticle = (id) => (dispatch) => {
       _id: id
     })
   }).then(
-    (res) => res.json()
-  ).then(
     (resJson) => {
       if (resJson.status === 200){
         dispatch(DeleteArticle(id))
@@ -55,23 +53,21 @@ export const deleteArticle = (id) => (dispatch) => {
 }
 
 export const editArticle = (id, article) => (dispatch) => {
-  fetch(PATH + `post/${_id}`, {
+  fetch(PATH + `post/${ id }`, {
     method: 'put',
     mode: 'cros',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
     body: $jsonPostBody({
-      article: article.title,
-      content: article.content,
-      id: _id
+      title: article.title,
+      content: article.content
     })
   }).then(
     (res) => res.json()
   ).then(
     (resJson) => {
       if (resJson.status === 200){
-        console.log(resJson)
         dispatch(EditArticle(article, id))
       } else {
         console.log(3)
@@ -80,18 +76,16 @@ export const editArticle = (id, article) => (dispatch) => {
   )
 }
 
-export const addComment = (articleId, comment) => (
-  fetch(PATH + 'post/newArticle', {
+export const addComment = (articleId, comment) => (dispatch) => (
+  fetch(PATH + `post/newComment/${ articleId }`, {
     method: 'post',
     mode: 'cros',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
     body: $jsonPostBody({
-      comments: [{
-        name: comment.name,
-        content: comment.content
-      }]
+      name: comment.name,
+      content: comment.content
     })
   }).then(
     (res) => res.json()

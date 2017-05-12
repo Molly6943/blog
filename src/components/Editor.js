@@ -9,7 +9,7 @@ import BombBox from './BombBox'
 class Editor extends Component{
   constructor ({ articles, match, actions, history }) {
     super()
-    const id = Number(match.params.id)
+    const id = match.params.id
     this.state = {
       article: id ? articles.filter((article) => article._id === id)[0] : { title: '', content: '' },
       isShown: false
@@ -46,7 +46,7 @@ class Editor extends Component{
 
   rightClick () {
     this.state.article._id ?
-    this.props.actions.editArticle(this.state.article._id, this.state) :
+    this.props.actions.editArticle(this.state.article._id, this.state.article) :
     this.props.actions.addArticle(this.state.article)
     this.props.history.push('/')
     this.setState({ isShown: !this.state.isShown })
@@ -80,7 +80,7 @@ class Editor extends Component{
     )
   }
 }
-//
+
 // Editor.propTypes = {
 //   articles: PropTypes.arrayOf(PropTypes.shape({
 //     title: PropTypes.string.isRequired,

@@ -4,9 +4,6 @@ export default function articles (state = [], action){
   switch (action.type) {
     case ADD_ARTICLE:
       return [
-        // {
-        //   ...action.article
-        // },
         ...state
       ]
     case DELETE_ARTICLE:
@@ -23,13 +20,13 @@ export default function articles (state = [], action){
       return state.map(
         (article) => {
           if (article._id === action.articleId) {
+            console.log(article.comments)
             article.comments.unshift({ ...action.comment })
           }
           return article
         }
       )
     case ALL_ARTICLE:
-      console.log(action)
       return action.articles
     default:
       return state

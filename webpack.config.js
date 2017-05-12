@@ -37,11 +37,10 @@ module.exports = {
     hot: true,
         // enable HMR on the server
     historyApiFallback: true,
-
-    contentBase: resolve(__dirname, 'dist')
+    contentBase: resolve(__dirname, 'dist'),
         // match the output path
 
-    // publicPath: '/'
+    publicPath: '/'
             // match the output `publicPath`
   },
 
