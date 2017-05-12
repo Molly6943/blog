@@ -39,4 +39,4 @@ const Item = ({ article, actions }) => {
 
 const mapDispatchToProps = (dispatch) => ({ actions: bindActionCreators({ deleteArticle }, dispatch) })
 
-export default connect(mapDispatchToProps)(Item)
+export default connect(null, mapDispatchToProps)(Item)

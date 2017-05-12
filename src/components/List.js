@@ -29,7 +29,6 @@ class List extends Component {
     ).then(
       (resJson) => {
         if (resJson.status === 200){
-          console.log(resJson.post)
           this.props.actions.allArticle(resJson.post)
         }
       }

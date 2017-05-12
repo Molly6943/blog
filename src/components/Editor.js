@@ -34,21 +34,17 @@ class Editor extends Component{
     })
   }
 
-  // handleSubmit (event){
-    // event.preventDefault()
-    // this.state.article._id ?
-    // this.props.actions.editArticle(this.state.article._id, this.state) :
-    // this.props.actions.addArticle(this.state.article)
-    // let isShown = this.state.isShown
-    // this.setState({ isShown: !isShown })
-  // }
+  handleSubmit (event){
+    event.preventDefault()
+    let isShown = this.state.isShown
+    this.setState({ isShown: !isShown })
+  }
 
   leftClick () {
     this.setState({ isShown: !this.state.isShown })
   }
 
   rightClick () {
-    event.preventDefault()
     this.state.article._id ?
     this.props.actions.editArticle(this.state.article._id, this.state) :
     this.props.actions.addArticle(this.state.article)
@@ -62,7 +58,7 @@ class Editor extends Component{
     return (
       <div className="write-essay">
         <h1 className="write-title">How about writing an article？</h1>
-        <form onSubmit = {this.rightClick.bind(this)} >
+        <form onSubmit = {this.handleSubmit.bind(this)} >
           <input className="input-title" type="text" placeholder="enter title" value={this.state.article.title} onChange={ this.handleTitleChange.bind(this) } />
           <textarea className="input-content" placeholder="enter content(support markdown)" value={this.state.article.content} onChange={ this.handleContentChange.bind(this) } />
           <input className="submit-button" type="submit" value="submit"/>

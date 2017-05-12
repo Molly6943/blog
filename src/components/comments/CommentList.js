@@ -4,7 +4,7 @@ import Comment from './Comment'
 
 const CommentList = ({ comments }) =>
   <div className="commentList">
-    { comments.map((comment) => (<Comment key={comment.name} comment={comment} />)) }
+    { comments.map((comment) => (<Comment key={comment._id} comment={comment} />)) }
   </div>
 
 // CommentList.propTypes = {

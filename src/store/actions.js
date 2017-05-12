@@ -7,26 +7,6 @@ const EditArticle = (article, id) => ({ type: types.EDIT_ARTICLE, id, article })
 const AddComment = (articleId, comment) => ({ type: types.ADD_COMMENT, articleId, comment })
 export const allArticle = (articles) => ({ type: types.ALL_ARTICLE, articles })
 
-// export const allArticle = (articles) => (dispatch) => {
-//   fetch(PATH + 'posts', {
-//     method: 'get',
-//     mode: 'cors',
-//     headers: {
-//       'Content-Type': 'application/x-www-form-urlencoded'
-//     }
-//   }).then(
-//     (res) => res.json()
-//   ).then(
-//     (resJson) => {
-//       if (resJson.status === 200){
-//         dispatch(AllArticle(articles))
-//       } else {
-//         console.log(1)
-//       }
-//     }
-//   )
-// }
-
 export const addArticle = (article) => (dispatch) => {
   fetch(PATH + 'post/newArticle', {
     method: 'post',
@@ -36,7 +16,7 @@ export const addArticle = (article) => (dispatch) => {
     },
     body: $jsonPostBody({
       title: article.title,
-      contents: article.content
+      content: article.content
     })
   }).then(
     (res) => res.json()
@@ -52,14 +32,14 @@ export const addArticle = (article) => (dispatch) => {
 }
 
 export const deleteArticle = (id) => (dispatch) => {
-  fetch(PATH + `post/${ _id }`, {
+  fetch(PATH + `post/${ id }`, {
     method: 'delete',
     mode: 'cors',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     },
     body: $jsonPostBody({
-      id: _id
+      _id: id
     })
   }).then(
     (res) => res.json()
@@ -108,15 +88,16 @@ export const addComment = (articleId, comment) => (
       'Content-Type': 'application/x-www-form-urlencoded'
     },
     body: $jsonPostBody({
-      name: comment.title,
-      content: comment.content
+      comments: [{
+        name: comment.name,
+        content: comment.content
+      }]
     })
   }).then(
     (res) => res.json()
   ).then(
     (resJson) => {
       if (resJson.status === 200){
-        console.log(resJson)
         dispatch(AddComment(articleId, comment))
       } else {
         console.log(4)

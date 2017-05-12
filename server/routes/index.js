@@ -76,7 +76,7 @@ const routes = (app) => {
   app.post('/post/newComment', function (req, res) {
     let comments = new postModel(req.body);
     comments.save()
-      .then((returnComment) => res.json({ comment: returnComment, status: 200 }))
+      .then((returnComment) => res.json(returnComment))
       .catch((err) => console.log(err))
   })
 }
