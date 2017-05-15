@@ -2,13 +2,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 class CommentBox extends Component {
-  constructor ({ comment, onCommend }) {
+  constructor ({ article, comment, onCommend }) {
     super()
     this.state = {
+      // article: { ...article },
       name: '',
-      content: '',
-      createdAt: Date.now(),
-      _id: Date.now()
+      content: ''
     }
   }
 

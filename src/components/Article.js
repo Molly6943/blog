@@ -23,7 +23,7 @@ const Article = ({ match, articles, actions }) => {
       <p>Last Modify: {new Date(article.updatedAt).toLocaleString()}</p>
       <p dangerouslySetInnerHTML={ $md2html(article.content || '') } />
       <CommentList comments={article.comments || []} />
-      <CommentBox onCommend={handleCommend} />
+      <CommentBox article={article} onCommend={handleCommend} />
     </div>
   )
 }

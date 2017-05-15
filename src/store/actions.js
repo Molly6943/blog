@@ -92,7 +92,7 @@ export const addComment = (articleId, comment) => (dispatch) => (
   ).then(
     (resJson) => {
       if (resJson.status === 200){
-        dispatch(AddComment(articleId, comment))
+        dispatch(AddComment(resJson.post))
       } else {
         console.log(4)
       }
