@@ -7,8 +7,5 @@ const CommentList = ({ comments }) =>
     { comments.map((comment) => <Comment key={comment._id} comment={comment} />) }
   </div>
 
-// CommentList.propTypes = {
-//   comments: PropTypes.array.isRequired
-// }
 
 export default CommentList

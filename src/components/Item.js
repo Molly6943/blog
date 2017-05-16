@@ -27,15 +27,6 @@ const Item = ({ article, actions }) => {
   )
 }
 
-// Item.propTypes = {
-//   article: PropTypes.objectOf(PropTypes.shape({
-//     _id: PropTypes.string.isRequired,
-//     title: PropTypes.string.isRequired,
-//     content: PropTypes.string.isRequired,
-//     // createdAt: PropTypes.number.isRequired,
-//     // updatedAt: PropTypes.number.isRequired
-//   }).isRequired).isRequired
-// }
 
 const mapDispatchToProps = (dispatch) => ({ actions: bindActionCreators({ deleteArticle }, dispatch) })
 

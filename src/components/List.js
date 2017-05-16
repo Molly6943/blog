@@ -6,12 +6,7 @@ import { allArticle } from '../store/actions'
 import PropTypes from 'prop-types'
 import styles from '../styles/List.css'
 import { connect } from 'react-redux'
-// const List = ({ articles }) => {
-//   console.log(articles);
-  // <ul className="list">
-  //   {articles.map((article) => <Item key={article.id} article={article} />)}
-  // </ul>
-// }
+
 class List extends Component {
   constructor ({ articles, actions }){
     super()
@@ -42,10 +37,7 @@ class List extends Component {
   }
 
 }
-//
-// List.propTypes = {
-//   articles: PropTypes.array.isRequired
-// }
+
 
 const mapStateToProps = (state) => ({ articles: state.articles })
 const mapDispatchToProps = (dispatch) => ({ actions: bindActionCreators({ allArticle }, dispatch) })

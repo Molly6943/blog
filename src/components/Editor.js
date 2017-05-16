@@ -81,15 +81,6 @@ class Editor extends Component{
   }
 }
 
-// Editor.propTypes = {
-//   articles: PropTypes.arrayOf(PropTypes.shape({
-//     title: PropTypes.string.isRequired,
-//     content: PropTypes.string.isRequired,
-//     createdAt: PropTypes.number.isRequired,
-//     updatedAt: PropTypes.number.isRequired,
-//     comments: PropTypes.array.isRequired
-//   }).isRequired).isRequired
-// }
 
 const mapStateToProps = (state) => ({ articles: state.articles })
 const mapDispatchToProps = (dispatch) => ({ actions: bindActionCreators({ editArticle, addArticle }, dispatch) })

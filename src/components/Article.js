@@ -7,7 +7,6 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { addComment } from '../store/actions'
 import { $md2html } from '../util'
-// import { PATH } from '../util'
 
 const Article = ({ match, articles, actions }) => {
   const article = articles.filter((article) => article._id === match.params.id)[0] || {}
@@ -23,7 +22,7 @@ const Article = ({ match, articles, actions }) => {
       <p>Last Modify: {new Date(article.updatedAt).toLocaleString()}</p>
       <p dangerouslySetInnerHTML={ $md2html(article.content || '') } />
       <CommentList comments={article.comments || []} />
-      <CommentBox article={article} onCommend={handleCommend} />
+      <CommentBox onCommend={handleCommend} />
     </div>
   )
 }

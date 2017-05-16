@@ -92,7 +92,8 @@ export const addComment = (articleId, comment) => (dispatch) => (
   ).then(
     (resJson) => {
       if (resJson.status === 200){
-        dispatch(AddComment(resJson.post))
+        const newComment = resJson.post.comments.pop()
+        dispatch(AddComment(articleId, newComment))
       } else {
         console.log(4)
       }
