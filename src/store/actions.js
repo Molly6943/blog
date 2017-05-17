@@ -6,6 +6,7 @@ const DeleteArticle = (id) => ({ type: types.DELETE_ARTICLE, id })
 const EditArticle = (article, id) => ({ type: types.EDIT_ARTICLE, id, article })
 const AddComment = (articleId, comment) => ({ type: types.ADD_COMMENT, articleId, comment })
 export const allArticle = (articles) => ({ type: types.ALL_ARTICLE, articles })
+export const oneArticle = (article, id) => ({ type: types.ONE_ARTICLE, article, id })
 
 export const addArticle = (article) => (dispatch) => {
   fetch(PATH + 'post/newArticle', {

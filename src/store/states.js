@@ -1,4 +1,4 @@
-import { ADD_ARTICLE, DELETE_ARTICLE, EDIT_ARTICLE, ADD_COMMENT, BOMB_BOX, ALL_ARTICLE } from './types'
+import { ADD_ARTICLE, DELETE_ARTICLE, EDIT_ARTICLE, ADD_COMMENT, BOMB_BOX, ALL_ARTICLE, ONE_ARTICLE } from './types'
 
 export default function articles (state = [], action){
   switch (action.type) {
@@ -26,6 +26,8 @@ export default function articles (state = [], action){
       })
     case ALL_ARTICLE:
       return action.articles
+    case ONE_ARTICLE:
+      return action.article
     default:
       return state
   }

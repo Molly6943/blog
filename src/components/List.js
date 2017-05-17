@@ -31,15 +31,22 @@ class List extends Component {
   }
 
   render () {
-    return (<ul className="list">
-      {this.props.articles.map((article) => <Item key={article._id} article={article} />)}
-    </ul>)
+    return (
+      <ul className="list">
+        {this.props.articles.map((article) => <Item key={article._id} article={article} />)}
+      </ul>
+    )
   }
-
 }
 
 
-const mapStateToProps = (state) => ({ articles: state.articles })
+// const mapStateToProps = (state) => ({ articles: state.articles })
+const mapStateToProps = function mapStateToProps (state) {
+  console.log('state.articles', state.articles);
+  return {
+    articles: state.articles
+  }
+}
 const mapDispatchToProps = (dispatch) => ({ actions: bindActionCreators({ allArticle }, dispatch) })
 
 export default connect(mapStateToProps, mapDispatchToProps)(List)
